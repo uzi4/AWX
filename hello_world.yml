@@ -1,0 +1,33 @@
+- name: Hello World Sample
+  hosts: all
+  vars:
+    ansible_user: administrator
+    ansible_password: 1@April@123
+    ansible_connection: winrm
+    ansible_winrm_transport: credssp
+    ansible_winrm_server_cert_validation: ignore
+  
+  tasks:
+    - name: Hello Message
+      debug:
+        msg: "Hello World!"
+    
+    - name: Retrieve machine credentials from Ansible Tower using the credential name
+      awx.awx.credential:
+        tower_host: "{{ tower_host }}"
+        tower_oauthtoken: "{{ tower_token }}"
+        name: "{{ credential_name }}"
+      vars:
+        user: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+      register: machine_credentials
+
+    - name: Display machine credentials
+      debug:
+        msg: |
+          Machine credentials retrieved from Ansible Tower:
+          Username: {{ machine_credentials.json.inputs.username }}
+          SSH Private Key: {{ machine_credentials.json.inputs.ssh_key_data }}
+          SSH Passphrase (if any): {{ machine_credentials.json.inputs.ssh_key_unlock }}
+          username: user
+          userpwd: password
