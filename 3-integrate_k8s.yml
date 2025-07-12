@@ -4,7 +4,7 @@
   gather_facts: no
 
   vars:
-    namespace: demo-space2
+    namespace: demo-space
 
   tasks:
 
@@ -20,7 +20,7 @@
         api_version: v1
         kind: Pod
         namespace: "{{ namespace }}"
-        name: nginx-pod2
+        name: nginx-pod
         state: present
         definition:
           metadata:
