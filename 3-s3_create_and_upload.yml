@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars:
-    bucket_name: test-bucket-001
+    bucket_name: uzair-test-bucket-001-ansible
     file_path: /tmp/sample.txt
     s3_object_name: sample.txt
 
