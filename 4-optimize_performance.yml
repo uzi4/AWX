@@ -1,0 +1,40 @@
+---
+- name: Gather facts and validate caching
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Show remote hostname
+      debug:
+        msg: "Remote hostname is {{ ansible_hostname }}"
+
+    - name: Verify fact cache exists in /runner/facts
+      command: ls -l /runner/facts
+      delegate_to: localhost
+      run_once: true
+
+    - name: Show cached file content
+      command: cat /runner/facts/{{ inventory_hostname }}
+      delegate_to: localhost
+      run_once: true
+      ignore_errors: yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
